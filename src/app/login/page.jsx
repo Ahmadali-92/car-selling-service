@@ -2,14 +2,16 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LogIn = () => {
   const router = useRouter()
   const [email,setEmail]=useState("")
   const [password, setPassword] = useState("")
   const [userData, setUserData] = useState("")
+  const notify = () => toast("Login Successfully!");
 
-  
   const handleFetch = async (event) => {
     event.preventDefault(); 
   
@@ -21,8 +23,9 @@ const LogIn = () => {
       const response = await axios.post('http://localhost:3000/api/login', dataToSend);
       setUserData(response.data)
      localStorage.setItem('userData',response.data.data._id)
-      if (response.data.status===200) {
+      if (response.data.status === 200) {
         router.push('/')
+        notify();
       }
       setEmail("")
       setPassword("")
@@ -34,6 +37,7 @@ const LogIn = () => {
 
   return (
     <>
+  <ToastContainer />
     <section className="bg-gray-50 dark:bg-gray-900">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

@@ -2,10 +2,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import Image from 'next/image';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CarForm = () => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
+  const notify = () => toast("Submited Successfully!");
 
   const [form, setForm] = useState({
     carModel: "",
@@ -46,7 +49,16 @@ const CarForm = () => {
             'Content-Type': 'application/json',
           },
         });
-        if (response.data.status==201) {
+        if (response.data.status == 201) {
+          notify();
+          setForm({
+            carModel: "",
+            price: "",
+            phoneNumber: "",
+            city: "",
+            maxNumberOfCopies: "",
+          })
+          setImagesPreview([])
           console.log('Form submitted successfully',response);
         } else {
           console.error('Form submission failed:');
@@ -201,14 +213,9 @@ const CarForm = () => {
       </div>
     </div>
   ))}
-</div>
-
-
+        </div>
         
-
-
-
-
+  <ToastContainer />
     </div>
       <button type="submit" className="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Form</button>
     </form>
