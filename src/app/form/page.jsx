@@ -11,6 +11,7 @@ const CarForm = () => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
   const notify = () => toast("Submited Successfully!");
+  const exeedImage = () => toast("Increase the no of copies");
 
   const [form, setForm] = useState({
     carModel: "",
@@ -68,6 +69,8 @@ const CarForm = () => {
       } catch (error) {
         console.error('Error submitting form:', error);
       }
+    } else {
+      exeedImage();
     }
    
   };
