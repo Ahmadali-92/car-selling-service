@@ -4,8 +4,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation'
 
 const CarForm = () => {
+  const router = useRouter()
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
   const notify = () => toast("Submited Successfully!");
@@ -92,6 +94,12 @@ const CarForm = () => {
     setImages(images.filter((_, i) => i !== index));
     setImagesPreview(imagesPreview.filter((_, i) => i !== index));
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    router.push('/login')
+    
+  }
 
   return (
     <form className="max-w-md mx-auto mt-10" onSubmit={handleSubmit}>
@@ -217,7 +225,10 @@ const CarForm = () => {
         
   <ToastContainer />
     </div>
+      <div className='flex justify-between'>
       <button type="submit" className="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Form</button>
+      <button onClick={handleLogout} type="button" className="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log out</button>
+      </div>
     </form>
   );
 };
