@@ -20,7 +20,7 @@ const LogIn = () => {
         email: email,
         password: password,
       };
-      const response = await axios.post('http://localhost:3000/api/login', dataToSend);
+      const response = await axios.post('/api/login', dataToSend);
       setUserData(response.data)
      localStorage.setItem('userData',response.data.data._id)
       if (response.data.status === 200) {

@@ -44,7 +44,7 @@ const CarForm = () => {
     });
     if (images.length <= form.maxNumberOfCopies) {
       try {
-        const response = await axios.post('http://localhost:3000/api/carForm', formData, {
+        const response = await axios.post('/api/carForm', formData, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -164,7 +164,7 @@ const CarForm = () => {
         </div>
       </div>
        <div className="flex gap-10">
-        <label htmlFor="maxNumberOfCopies" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">No of pages</label>
+        <label htmlFor="maxNumberOfCopies" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">No of copies</label>
         <select
           id="maxNumberOfCopies"
           name="maxNumberOfCopies"
